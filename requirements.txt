@@ -1,0 +1,4 @@
+panda3d
+panda3d-cefconsole
+panda3d-keybindings
+wecs
