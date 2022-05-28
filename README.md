@@ -32,7 +32,8 @@ game with the TheCheapestPixels stack.
     of the debug system and no entities. This is set up in
     `game/main_loop.py`.
 * TODO
-  * Redo in a blank virtualenv, and deal with dependencies.
+  * grep for STARTPROJECT and adapt
+  * Redo in a blank virtualenv, and deal with dependencies
   * Package
   * Set up docs and tests
 
@@ -40,4 +41,7 @@ game with the TheCheapestPixels stack.
 ###From blank slate to walking around in the station
 
 * TODO
+  * Add `game/aspects.py` and define aspects in it.
+  * Add systems and entities to your game in
+    `game/__init__.py::MainGameLoop`.
   * Everything
