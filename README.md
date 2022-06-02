@@ -165,6 +165,24 @@ keyboard input. As the camera is rather slow, we now add a higher
 the `third_person` aspect.
 
 
+### `03`: And now a level around us, please.
+
+So, what is a level? A bunch of geometry created (likely in Blender)
+after some technical specifications (FIXME: which need to be defined and
+documented here), put into the right kind of entity. That kind has
+`Model´ and `Geometry` component types, plus
+`wecs.panda3d.spawnpoints.SpawnMap` which allows the spawning system to
+easily relocate models to spawn points on the level. Correspondingly, we
+add the `wecs.panda3d.spawnpoints.SpawnAt` to what a character is.
+
+In `main_loop.py`, we add the `wecs.panda3d.spawnpoints.Spawn` system,
+create a new entity using the `game_map` aspect, and add the name of the
+spawn point to use on the existing character.
+
+We can now see the level geometry around the character, and that it is
+indeed put on the spawn point.
+
+
 ### TODO
 
 Everything else
