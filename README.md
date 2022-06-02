@@ -11,7 +11,7 @@ This isn't strictly a changelog, but a few notes on how to develop a
 game with the TheCheapestPixels stack.
 
 
-###Setting up basics
+### Setting up basics
 
 * Created repository
 * Uploaded art to `assets/`
@@ -38,7 +38,7 @@ game with the TheCheapestPixels stack.
   * Set up docs and tests
 
 
-###From blank slate to walking around in the station
+### From blank slate to walking around in the station
 
 The directory `game/` contains copies of several files after phases of
 development, prefixed with `<#phase>_`, e.g. `00_main_loop.py`.
