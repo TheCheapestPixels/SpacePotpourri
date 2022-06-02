@@ -33,10 +33,14 @@ see a splash advertising Panda3D, and get dropped in the main game loop.
   cp -r ~/wecs_null_project/game/ .
   ```
 
-Current state:
-* `stageflow`: The game can now be started with `python main.py`, or
-  `python main.py -s debug` to jump right into the `main_game_stage`.
-  This is set up in `game/__init__.py`.
+Current state: We have a running skeleton of a not-yet-a-game that we
+can run and (FIXME: not yet) package. To this end, we're using these
+packages:
+* `panda3d-stageflow`: The game can now be started with
+  `python main.py`, or `python main.py -s debug` to jump right into the
+  `main_game_stage`. This is set up in `game/__init__.py`.
+* `panda3d-keybindings`: The device listener is set up, and used below
+  by the debug system.
 * `wecs`: The main game loop is a stageflow WECS stage consisting only
   of the debug system and no entities. This is set up in
   `game/main_loop.py`. Specifically, the
@@ -125,6 +129,40 @@ To do this, we need to modify two files:
       setting the camera to its initial position.
   * `setup`: We create an entity and add the `player_character` aspect
     to it.
+
+
+### `02`: Rotating the camera
+
+Since we have it set up already, we might as well add player control
+over the camera, as it gives an opportunity for a deeper dive into
+`panda3d-keybindings` and the `keybindings.config` to set it up.
+
+First, in `aspects.py`, we add the `pc_mind` aspect containing the
+`wecs.panda3d.input.Input` type, and the override value
+`{'camera_movement', 'camera_zoom'}` for its `contexts` field. This
+field indicates which input contexts are currently active for the entity
+with an `Input` component on it, and will likely see a lot of context-
+driven change thoughout a playthrough.
+
+Then we add this aspect to the `player_character` aspect, so it will get
+added to our player entity.
+
+Lastly we need to define the keybindings. In `keybindings.config`, we
+add the contexts `camera_movement` and `camera_zoom`. The former
+contains an axis2d input named `rotation`, which in the case of a camera
+in `ObjectCentricCameraMode` will (to nobody's surprise) rotate it
+around the centered object.
+
+FIXME: Maybe repeat the whole definition of bindings and their order
+here; Right now I have better things to type out.
+
+FIXME: Why do we need two contexts for camera controls?
+
+Now we can rotate around the player character using a gamepad or the
+`ijkl` keys, and also see that gamepad input takes priority over
+keyboard input. As the camera is rather slow, we now add a higher
+`turning_speed` value to the `ObjectCentricCameraMode` as an override in
+the `third_person` aspect.
 
 
 ### TODO
