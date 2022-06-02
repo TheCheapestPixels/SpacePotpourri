@@ -21,7 +21,7 @@ character = Aspect(
 )
 
 
-third_person_base = Aspect(
+third_person = Aspect(
     [
         wecs.panda3d.camera.Camera,
         wecs.panda3d.camera.ObjectCentricCameraMode,
@@ -32,6 +32,6 @@ third_person_base = Aspect(
 player_character = Aspect(
     [
         character,
-        third_person_base,
+        third_person,
     ],
 )
