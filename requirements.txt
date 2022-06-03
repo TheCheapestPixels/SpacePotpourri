@@ -1,4 +1,5 @@
 panda3d
-panda3d-cefconsole
 panda3d-keybindings
+panda3d-stageflow
+panda3d-assetcoop
 wecs
