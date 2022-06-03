@@ -4,6 +4,8 @@ from stageflow.wecs import WECSStage
 
 import assetcoop
 
+from boterham.loader import boterham_load_model
+
 from game import aspects
 
 
@@ -32,7 +34,7 @@ class MainGameStage(WECSStage):
             base.ecs_world.create_entity(name="Level geometry"),
             overrides={
                 wecs.panda3d.prototype.Geometry: dict(
-                    file='assets/bam/comp.bam',
+                    node=boterham_load_model('assets/bam/comp.bam'),
                 ),
             },
         )
