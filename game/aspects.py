@@ -19,6 +19,8 @@ character = Aspect(
         wecs.panda3d.prototype.Model,
         wecs.panda3d.prototype.Geometry,
         wecs.panda3d.spawnpoints.SpawnAt,
+        wecs.panda3d.character.CharacterController,
+        wecs.panda3d.character.WalkingMovement,
     ],
     overrides={
         wecs.mechanics.clock.Clock: dict(
@@ -26,6 +28,9 @@ character = Aspect(
         ),
         wecs.panda3d.prototype.Geometry: dict(
             file='models/character/rebecca.bam',
+        ),
+        wecs.panda3d.character.WalkingMovement: dict(
+            speed=500.0,
         ),
     },
 )
@@ -53,6 +58,7 @@ pc_mind = Aspect(
             contexts={
                 'camera_movement',
                 'camera_zoom',
+                'character_movement',
             },
         ),
     },

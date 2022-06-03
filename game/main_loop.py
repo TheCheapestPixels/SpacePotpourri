@@ -17,6 +17,11 @@ class MainGameStage(WECSStage):
         (0, -30, wecs.panda3d.camera.PrepareCameras),
         # Update clocks
         (0, -40, wecs.mechanics.clock.DetermineTimestep),
+        # Set inputs to the character controller
+        (0, -90, wecs.panda3d.character.UpdateCharacter),
+        # Character controller
+        (0, -110, wecs.panda3d.character.Walking),
+        (0, -200, wecs.panda3d.character.ExecuteMovement),
         # Camera
         (0, -210, wecs.panda3d.camera.ReorientObjectCentricCamera),
         # Debug keys (`escape` to close, etc.)
