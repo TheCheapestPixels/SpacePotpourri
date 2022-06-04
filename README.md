@@ -183,6 +183,35 @@ We can now see the level geometry around the character, and that it is
 indeed put on the spawn point.
 
 
+### `04`: The basics of moving around.
+
+To make our character model an actually controllable character, we add
+the basics of the character controller setup, consisting of three
+systems:
+* `wecs.panda3d.character.UpdateCharacter´: This system reads player
+  input and writes it onto the character's `CharacterController`
+  component. At this stage thosevalues are best thought of as an
+  indication of what the player wants to be done, given numerically in
+  controller space (-1.0 to 1.0 per dimension).
+* `wecs.panda3d.character.Walking`: This is a movement system. It turns
+  the input into a movemet vector (turning the vector on a square into
+  oe on a circle, avoiding the "running diagonally is faster" bug).
+  Movement systems have to be placed between `UpdateCharacter` and
+  `ExecuteMovement`, and be well-behaved in their mutual interactions.
+* `wecs.panda3d.character.ExecuteMovement`: Intention is now turned into
+  actual movement, the model's position is updated, and speed
+  information is calculated.
+
+On the aspect side of things, we add the component types
+`wecs.panda3d.character.CharacterController` and
+`wecs.panda3d.character.WalkingMovement`, set a walking speed, and add
+'character_movement' to the input contexts. This also requires adding
+the context's bindings to `keybindings.config`.
+
+Now we can move around the character on the horizontal plane and rotate
+it left and right.
+
+
 ### TODO
 
 Everything else
