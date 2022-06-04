@@ -21,6 +21,8 @@ class MainGameStage(WECSStage):
         (0, -90, wecs.panda3d.character.UpdateCharacter),
         # Character controller
         (0, -110, wecs.panda3d.character.Walking),
+        (0, -150, wecs.panda3d.character.Bumping),
+        (0, -160, wecs.panda3d.character.Falling),
         (0, -200, wecs.panda3d.character.ExecuteMovement),
         # Camera
         (0, -210, wecs.panda3d.camera.ReorientObjectCentricCamera),
@@ -39,7 +41,10 @@ class MainGameStage(WECSStage):
             base.ecs_world.create_entity(name="Level geometry"),
             overrides={
                 wecs.panda3d.prototype.Geometry: dict(
+                    #file='models/scenes/lona.bam',
                     node=boterham_load_model('assets/bam/comp.bam'),
+                    #node=boterham_load_model('assets/bam/gravitytest/cylinder.bam'),
+                    #node=boterham_load_model('models/gravitytest/cylinder.bam'),
                 ),
             },
         )
