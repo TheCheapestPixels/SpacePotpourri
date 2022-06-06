@@ -212,9 +212,27 @@ Now we can move around the character on the horizontal plane and rotate
 it left and right.
 
 
-### `05`: Respect the ground.
+### `05`: Respect the ground, and be smoother.
 
+This one is easy. We add four more movement systems: `Inertiing`,
+`Bumping`, `Falling`, `Jumping`. Inertiing makes the whole movement
+process more organic by adding inertia to the movement. Bumping and
+falling each depend on a collision solid that is loaded from the
+geometric model; Bumping occurs when the character runs into an object
+and is held back along its horizontal plane, while falling occurs when
+the model needs to be  moved vertically. Jumping is only possible when
+the model has ground contact, and when done, it adds an upward speed to
+the character.
 
+We also add the corresponding movement component types to the character
+aspect, and keybind jumping; This time we do nor have to add a new
+context to the `Input`, but missing this is usually a typical error
+source for some new system not appearing to work.
+
+As for the terrain, we make the geometry collidable by adding
+`wecs.panda3d.prototype.CollidableGeometry`, and set the mask according
+to what should collide with it, in this case the collision solids for
+falling and bumping.
 
 
 ### TODO
