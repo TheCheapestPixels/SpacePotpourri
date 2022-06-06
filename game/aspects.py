@@ -1,3 +1,5 @@
+from panda3d.core import Vec3
+
 import wecs
 
 from wecs.aspects import Aspect
@@ -54,8 +56,10 @@ character = Aspect(
         wecs.panda3d.prototype.Geometry,
         wecs.panda3d.spawnpoints.SpawnAt,
         wecs.panda3d.character.CharacterController,
+        wecs.panda3d.character.InertialMovement,
         wecs.panda3d.character.WalkingMovement,
         wecs.panda3d.character.FallingMovement,
+        wecs.panda3d.character.JumpingMovement,
         wecs.panda3d.character.BumpingMovement,
     ],
     overrides={
@@ -65,6 +69,9 @@ character = Aspect(
         wecs.panda3d.prototype.Geometry: dict(
             file='models/character/rebecca.bam',
         ),
+        wecs.panda3d.character.CharacterController: dict(
+            gravity=Vec3(0, 0, -50),
+        ),
         wecs.panda3d.character.WalkingMovement: dict(
             speed=30.0,
         ),
@@ -72,13 +79,16 @@ character = Aspect(
             node_name='bumper',
             tag_name='bumper',
             solids=factory(rebecca_bumper),
-            debug=True,
+            #debug=True,
         ),
         wecs.panda3d.character.FallingMovement: dict(
             node_name='lifter',
             tag_name='lifter',
             solids=factory(rebecca_lifter),
             #debug=True,
+        ),
+        wecs.panda3d.character.JumpingMovement:dict(
+            impulse=Vec3(0, 0, 20),
         ),
     },
 )

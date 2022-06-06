@@ -21,8 +21,10 @@ class MainGameStage(WECSStage):
         (0, -90, wecs.panda3d.character.UpdateCharacter),
         # Character controller
         (0, -110, wecs.panda3d.character.Walking),
+        (0, -120, wecs.panda3d.character.Inertiing),
         (0, -150, wecs.panda3d.character.Bumping),
         (0, -160, wecs.panda3d.character.Falling),
+        (0, -170, wecs.panda3d.character.Jumping),
         (0, -200, wecs.panda3d.character.ExecuteMovement),
         ## Determine and apply character's local gravity
         #(0, -201, wecs.panda3d.gravity.AdjustGravity),
