@@ -235,6 +235,23 @@ to what should collide with it, in this case the collision solids for
 falling and bumping.
 
 
+### `06`: Interaction between camera and movement
+
+To achieve a smoother, more intuitive interaction with the character, we
+add a mechanic which makes the character turn toward where you are
+looking when it moves. This consists of two systems,
+`wecs.panda3d.character.TurningBackToCamera` and
+`wecs.panda3d.character.AutomaticallyTurnTowardsDirection`
+
+As for the new component types on the character aspect:
+`wecs.panda3d.character.AutomaticTurningMovement` keeps track of what
+direction to turn in, while
+`wecs.panda3d.character.TurningBackToCameraMovement` makes
+`TurningBackToCamera` set that direction parallel to the camera's view
+axis. `AutomaticallyTurnTowardsDirection` then applies that turning to
+the character, and a corresponding conter-rotation to the camera.
+
+
 ### TODO
 
 Everything else
