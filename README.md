@@ -252,6 +252,25 @@ axis. `AutomaticallyTurnTowardsDirection` then applies that turning to
 the character, and a corresponding conter-rotation to the camera.
 
 
+### `07`: Gravity
+
+By default, the character's gravity vector is set to the character's -z
+vector. This can be changed on `CharacterController.gravity`.
+
+For more complex situations, we need a more complex mechanic. Currently
+we only have inside-of-a-cylinder gravity as an alternative.
+`wecs.panda3d.gravity.AdjustGravity` will calculate on each character,
+based on a node in the `base.render` sene graph called `gravity`, using
+its x/z plane distance to calculate outward-going gravity, and set it as
+`CharacterController.gravity`. `wecs.panda3d.gravity.ErectCharacter`
+will then calculate a rotation of the character so as to orient it
+according to its local gravity.
+
+Nothing needs to be changed on the characterr aspect. Before this, the
+initial gravity vector was simply used as given and never changed, now
+the `AdjustGravity` system changes it.
+
+
 ### TODO
 
 Everything else
