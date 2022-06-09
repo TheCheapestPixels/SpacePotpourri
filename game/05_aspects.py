@@ -14,7 +14,6 @@ game_map = Aspect(
         wecs.panda3d.prototype.Model,
         wecs.panda3d.prototype.Geometry,
         wecs.panda3d.prototype.CollidableGeometry,
-        #wecs.panda3d.prototype.FlattenStrong,
         wecs.panda3d.spawnpoints.SpawnMap,
      ],
     overrides={
@@ -29,10 +28,6 @@ def rebecca_bumper():
     return {
         'bumper': dict(
             node_name='bumper',
-            #shape=CollisionSphere,
-            #center=Vec3(0.0, 0.0, 1.0),
-            #radius=0.7,
-            debug=True,
         ),
     }
 
@@ -41,10 +36,6 @@ def rebecca_lifter():
     return {
         'lifter': dict(
             node_name='lifter',
-            #shape=CollisionSphere,
-            #center=Vec3(0.0, 0.0, 0.5),
-            #radius=0.5,
-            debug=True,
         ),
     }
 
@@ -79,13 +70,11 @@ character = Aspect(
             node_name='bumper',
             tag_name='bumper',
             solids=factory(rebecca_bumper),
-            #debug=True,
         ),
         wecs.panda3d.character.FallingMovement: dict(
             node_name='lifter',
             tag_name='lifter',
             solids=factory(rebecca_lifter),
-            #debug=True,
         ),
         wecs.panda3d.character.JumpingMovement:dict(
             impulse=Vec3(0, 0, 20),
@@ -98,16 +87,10 @@ third_person = Aspect(
     [
         wecs.panda3d.camera.Camera,
         wecs.panda3d.camera.ObjectCentricCameraMode,
-        wecs.panda3d.character.AutomaticTurningMovement,
-        wecs.panda3d.character.TurningBackToCameraMovement,
     ],
     overrides={
         wecs.panda3d.camera.ObjectCentricCameraMode: dict(
             turning_speed=180.0,
-        ),
-        wecs.panda3d.character.TurningBackToCameraMovement: dict(
-            view_axis_alignment=0.4,
-            threshold=0.2,
         ),
     },
 )

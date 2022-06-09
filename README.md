@@ -183,6 +183,94 @@ We can now see the level geometry around the character, and that it is
 indeed put on the spawn point.
 
 
+### `04`: The basics of moving around.
+
+To make our character model an actually controllable character, we add
+the basics of the character controller setup, consisting of three
+systems:
+* `wecs.panda3d.character.UpdateCharacter´: This system reads player
+  input and writes it onto the character's `CharacterController`
+  component. At this stage thosevalues are best thought of as an
+  indication of what the player wants to be done, given numerically in
+  controller space (-1.0 to 1.0 per dimension).
+* `wecs.panda3d.character.Walking`: This is a movement system. It turns
+  the input into a movemet vector (turning the vector on a square into
+  oe on a circle, avoiding the "running diagonally is faster" bug).
+  Movement systems have to be placed between `UpdateCharacter` and
+  `ExecuteMovement`, and be well-behaved in their mutual interactions.
+* `wecs.panda3d.character.ExecuteMovement`: Intention is now turned into
+  actual movement, the model's position is updated, and speed
+  information is calculated.
+
+On the aspect side of things, we add the component types
+`wecs.panda3d.character.CharacterController` and
+`wecs.panda3d.character.WalkingMovement`, set a walking speed, and add
+'character_movement' to the input contexts. This also requires adding
+the context's bindings to `keybindings.config`.
+
+Now we can move around the character on the horizontal plane and rotate
+it left and right.
+
+
+### `05`: Respect the ground, and be smoother.
+
+This one is easy. We add four more movement systems: `Inertiing`,
+`Bumping`, `Falling`, `Jumping`. Inertiing makes the whole movement
+process more organic by adding inertia to the movement. Bumping and
+falling each depend on a collision solid that is loaded from the
+geometric model; Bumping occurs when the character runs into an object
+and is held back along its horizontal plane, while falling occurs when
+the model needs to be  moved vertically. Jumping is only possible when
+the model has ground contact, and when done, it adds an upward speed to
+the character.
+
+We also add the corresponding movement component types to the character
+aspect, and keybind jumping; This time we do nor have to add a new
+context to the `Input`, but missing this is usually a typical error
+source for some new system not appearing to work.
+
+As for the terrain, we make the geometry collidable by adding
+`wecs.panda3d.prototype.CollidableGeometry`, and set the mask according
+to what should collide with it, in this case the collision solids for
+falling and bumping.
+
+
+### `06`: Interaction between camera and movement
+
+To achieve a smoother, more intuitive interaction with the character, we
+add a mechanic which makes the character turn toward where you are
+looking when it moves. This consists of two systems,
+`wecs.panda3d.character.TurningBackToCamera` and
+`wecs.panda3d.character.AutomaticallyTurnTowardsDirection`
+
+As for the new component types on the character aspect:
+`wecs.panda3d.character.AutomaticTurningMovement` keeps track of what
+direction to turn in, while
+`wecs.panda3d.character.TurningBackToCameraMovement` makes
+`TurningBackToCamera` set that direction parallel to the camera's view
+axis. `AutomaticallyTurnTowardsDirection` then applies that turning to
+the character, and a corresponding conter-rotation to the camera.
+
+
+### `07`: Gravity
+
+By default, the character's gravity vector is set to the character's -z
+vector. This can be changed on `CharacterController.gravity`.
+
+For more complex situations, we need a more complex mechanic. Currently
+we only have inside-of-a-cylinder gravity as an alternative.
+`wecs.panda3d.gravity.AdjustGravity` will calculate on each character,
+based on a node in the `base.render` sene graph called `gravity`, using
+its x/z plane distance to calculate outward-going gravity, and set it as
+`CharacterController.gravity`. `wecs.panda3d.gravity.ErectCharacter`
+will then calculate a rotation of the character so as to orient it
+according to its local gravity.
+
+Nothing needs to be changed on the characterr aspect. Before this, the
+initial gravity vector was simply used as given and never changed, now
+the `AdjustGravity` system changes it.
+
+
 ### TODO
 
 Everything else
