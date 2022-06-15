@@ -258,17 +258,25 @@ By default, the character's gravity vector is set to the character's -z
 vector. This can be changed on `CharacterController.gravity`.
 
 For more complex situations, we need a more complex mechanic. Currently
-we only have inside-of-a-cylinder gravity as an alternative.
-`wecs.panda3d.gravity.AdjustGravity` will calculate on each character,
-based on a node in the `base.render` sene graph called `gravity`, using
-its x/z plane distance to calculate outward-going gravity, and set it as
+we only have inside-of-a-cylinder gravity as an alternative, but plans
+for more exist, so stay tuned.
+
+This time we start with the aspects, as those define what gravity
+sources are used for which entities. We add
+`wecs.panda3d.gravity.GravityMap` to `game_map`, indicating that there
+are gravity-indicating nodes on the map's model, and add
+`wecs.panda3d.gravity.GravityMovement` to the character, indicating that
+its gravity vector should be calculated based on such nodes.
+
+Systems-wise, `wecs.panda3d.gravity.AdjustGravity` will calculate the
+gravity on each character, based on gravity nodes used, and set it as
 `CharacterController.gravity`. `wecs.panda3d.gravity.ErectCharacter`
 will then calculate a rotation of the character so as to orient it
 according to its local gravity.
 
-Nothing needs to be changed on the characterr aspect. Before this, the
-initial gravity vector was simply used as given and never changed, now
-the `AdjustGravity` system changes it.
+On both cmponents, we set `node_names=['gravity']` to inicate the node
+to use. Epect this bit to evolve as we experiment with more complex
+gravity.
 
 
 ### TODO

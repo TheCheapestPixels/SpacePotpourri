@@ -15,6 +15,7 @@ game_map = Aspect(
         wecs.panda3d.prototype.Geometry,
         wecs.panda3d.prototype.CollidableGeometry,
         #wecs.panda3d.prototype.FlattenStrong,
+        wecs.panda3d.gravity.GravityMap,
         wecs.panda3d.spawnpoints.SpawnMap,
      ],
     overrides={
@@ -61,6 +62,7 @@ character = Aspect(
         wecs.panda3d.character.FallingMovement,
         wecs.panda3d.character.JumpingMovement,
         wecs.panda3d.character.BumpingMovement,
+        wecs.panda3d.gravity.GravityMovement,
     ],
     overrides={
         wecs.mechanics.clock.Clock: dict(

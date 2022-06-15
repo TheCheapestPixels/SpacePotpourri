@@ -19,14 +19,12 @@ class MainGameStage(WECSStage):
         (0, -40, wecs.mechanics.clock.DetermineTimestep),
         # Set inputs to the character controller
         (0, -90, wecs.panda3d.character.UpdateCharacter),
-        #(0, -91, wecs.panda3d.character.ReorientInputBasedOnCamera),
         # Character controller
         (0, -110, wecs.panda3d.character.Walking),
         (0, -120, wecs.panda3d.character.Inertiing),
         (0, -150, wecs.panda3d.character.Bumping),
         (0, -160, wecs.panda3d.character.Falling),
         (0, -170, wecs.panda3d.character.Jumping),
-        #(0, -171, wecs.panda3d.character.DirectlyIndicateDirection),
         (0, -172, wecs.panda3d.character.TurningBackToCamera),
         (0, -173, wecs.panda3d.character.AutomaticallyTurnTowardsDirection),
         (0, -200, wecs.panda3d.character.ExecuteMovement),
@@ -50,11 +48,10 @@ class MainGameStage(WECSStage):
             base.ecs_world.create_entity(name="Level geometry"),
             overrides={
                 wecs.panda3d.prototype.Geometry: dict(
-                    #file='models/scenes/lona.bam',
-                    #node=boterham_load_model('assets/bam/comp.bam'),
-                    #node=boterham_load_model('assets/bam/ring_center_segment.bam'),
-                    #node=boterham_load_model('assets/bam/elevator.bam'),
                     node=boterham_load_model('models/gravitytest/cylinder.bam'),
+                ),
+                wecs.panda3d.gravity.GravityMap: dict(
+                    node_names=['gravity'],
                 ),
             },
         )
@@ -64,6 +61,9 @@ class MainGameStage(WECSStage):
             overrides={
                 wecs.panda3d.spawnpoints.SpawnAt: dict(
                     name='spawn',
+                ),
+                wecs.panda3d.gravity.GravityMovement: dict(
+                    node_names=['gravity'],
                 ),
             },
         )

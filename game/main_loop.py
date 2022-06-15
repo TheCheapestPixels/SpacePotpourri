@@ -50,11 +50,12 @@ class MainGameStage(WECSStage):
             base.ecs_world.create_entity(name="Level geometry"),
             overrides={
                 wecs.panda3d.prototype.Geometry: dict(
-                    #file='models/scenes/lona.bam',
                     #node=boterham_load_model('assets/bam/comp.bam'),
-                    #node=boterham_load_model('assets/bam/ring_center_segment.bam'),
-                    #node=boterham_load_model('assets/bam/elevator.bam'),
                     node=boterham_load_model('models/gravitytest/cylinder.bam'),
+                ),
+                wecs.panda3d.gravity.GravityMap: dict(
+                    node_names=['gravity'],
+                    #node_names=['gravity_cylinder'],
                 ),
             },
         )
@@ -64,6 +65,11 @@ class MainGameStage(WECSStage):
             overrides={
                 wecs.panda3d.spawnpoints.SpawnAt: dict(
                     name='spawn',
+                    #name='spawn_0',
+                ),
+                wecs.panda3d.gravity.GravityMovement: dict(
+                    node_names=['gravity'],
+                    #node_names=['gravity_cylinder'],
                 ),
             },
         )
