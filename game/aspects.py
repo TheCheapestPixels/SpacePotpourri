@@ -63,6 +63,7 @@ character = Aspect(
         wecs.panda3d.character.JumpingMovement,
         wecs.panda3d.character.BumpingMovement,
         wecs.panda3d.gravity.GravityMovement,
+        wecs.panda3d.interaction.Interactor,
     ],
     overrides={
         wecs.mechanics.clock.Clock: dict(
