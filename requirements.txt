@@ -2,5 +2,6 @@ panda3d
 panda3d-keybindings
 panda3d-stageflow
 panda3d-assetcoop
+panda3d-logos
 panda3d-boterham
 wecs
