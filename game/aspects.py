@@ -28,7 +28,7 @@ game_map = Aspect(
 
 def rebecca_bumper():
     return {
-        'bumper': dict(
+        'bumping': dict(
             node_name='bumper',
             #shape=CollisionSphere,
             #center=Vec3(0.0, 0.0, 1.0),
@@ -80,7 +80,7 @@ character = Aspect(
         ),
         wecs.panda3d.character.BumpingMovement: dict(
             node_name='bumper',
-            tag_name='bumper',
+            #tag_name='bumper',
             solids=factory(rebecca_bumper),
             #debug=True,
         ),
