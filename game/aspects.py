@@ -28,12 +28,12 @@ game_map = Aspect(
 
 def rebecca_bumper():
     return {
-        'bumping': dict(
+        'bumper': dict(
             node_name='bumper',
             #shape=CollisionSphere,
             #center=Vec3(0.0, 0.0, 1.0),
             #radius=0.7,
-            debug=True,
+            #debug=True,
         ),
     }
 
@@ -45,9 +45,17 @@ def rebecca_lifter():
             #shape=CollisionSphere,
             #center=Vec3(0.0, 0.0, 0.5),
             #radius=0.5,
-            debug=True,
+            #debug=True,
         ),
     }
+
+
+def rebecca_interactor():
+    return {'interactor': dict(node_name='interactor', debug=False)}
+
+
+def rebecca_interactee():
+    return {'interactee': dict(node_name='interactee', debug=True)}
 
 
 character = Aspect(
@@ -64,6 +72,7 @@ character = Aspect(
         wecs.panda3d.character.BumpingMovement,
         wecs.panda3d.gravity.GravityMovement,
         wecs.panda3d.interaction.Interactor,
+        wecs.panda3d.interaction.Interactee,
     ],
     overrides={
         wecs.mechanics.clock.Clock: dict(
@@ -79,19 +88,21 @@ character = Aspect(
             speed=30.0,
         ),
         wecs.panda3d.character.BumpingMovement: dict(
-            node_name='bumper',
-            #tag_name='bumper',
             solids=factory(rebecca_bumper),
-            #debug=True,
         ),
         wecs.panda3d.character.FallingMovement: dict(
-            node_name='lifter',
-            tag_name='lifter',
             solids=factory(rebecca_lifter),
-            #debug=True,
         ),
-        wecs.panda3d.character.JumpingMovement:dict(
-            impulse=Vec3(0, 0, 20),
+        wecs.panda3d.character.JumpingMovement: dict(
+            impulse=Vec3(0, 0, 6),
+        ),
+        wecs.panda3d.interaction.Interactor: dict(
+            solids=factory(rebecca_interactor),
+            interactions=['handshake'],
+        ),
+        wecs.panda3d.interaction.Interactee: dict(
+            solids=factory(rebecca_interactee),
+            interactions=['handshake'],
         ),
     },
 )

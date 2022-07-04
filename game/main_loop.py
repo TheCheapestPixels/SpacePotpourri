@@ -33,8 +33,8 @@ class MainGameStage(WECSStage):
         (0, -173, wecs.panda3d.character.AutomaticallyTurnTowardsDirection),
         (0, -200, wecs.panda3d.character.ExecuteMovement),
         # Determine and apply character's local gravity
-        (0, -201, wecs.panda3d.gravity.AdjustGravity),
-        (0, -202, wecs.panda3d.gravity.ErectCharacter),
+        #(0, -201, wecs.panda3d.gravity.AdjustGravity),
+        #(0, -202, wecs.panda3d.gravity.ErectCharacter),
         # Camera
         (0, -210, wecs.panda3d.camera.ReorientObjectCentricCamera),
         # Debug keys (`escape` to close, etc.)
@@ -53,7 +53,8 @@ class MainGameStage(WECSStage):
             overrides={
                 wecs.panda3d.prototype.Geometry: dict(
                     #node=boterham_load_model('assets/bam/comp.bam'),
-                    node=boterham_load_model('models/gravitytest/cylinder.bam'),
+                    #node=boterham_load_model('models/gravitytest/cylinder.bam'),
+                    node=boterham_load_model('models/gravitytest/interact_plane.bam'),
                 ),
                 wecs.panda3d.gravity.GravityMap: dict(
                     node_names=['gravity'],
@@ -66,12 +67,24 @@ class MainGameStage(WECSStage):
             base.ecs_world.create_entity(name="Playerbecca"),
             overrides={
                 wecs.panda3d.spawnpoints.SpawnAt: dict(
-                    name='spawn',
+                    #name='spawn',
                     #name='spawn_0',
+                    name='spawn_a',
                 ),
                 wecs.panda3d.gravity.GravityMovement: dict(
                     node_names=['gravity'],
                     #node_names=['gravity_cylinder'],
+                ),
+            },
+        )
+        aspects.character.add(
+            base.ecs_world.create_entity(name="NPBecca"),
+            overrides={
+                wecs.panda3d.spawnpoints.SpawnAt: dict(
+                    name='spawn_b',
+                ),
+                wecs.panda3d.gravity.GravityMovement: dict(
+                    node_names=['gravity'],
                 ),
             },
         )
