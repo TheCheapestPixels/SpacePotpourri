@@ -279,6 +279,24 @@ to use. Epect this bit to evolve as we experiment with more complex
 gravity.
 
 
+### `08`: Preparing interactions.
+
+Entitys can be Interactors, Interactees, or both. Whenever an
+Interactor's collision solid overlaps an Interactee of another entity,
+and those share a mode of interaction, that interaction is possible. In
+code terms that means that the Interactee entity will show up in
+`Interactor.action_options`.
+
+The character aspect gets both `Interactor` and `Interactee´ components,
+with a `"handshake"` interaction on both; Thus two characters standing
+close to each other will cause the handshake interaction to be shown as
+available on their respective `Interactor`s when the
+`wecs.panda3d.interaction.Interacting` system runs.
+
+As for the rest of the changes: We need a map with multiple spawn
+points, and we need an NPC; That's it.
+
+
 ### TODO
 
 Everything else

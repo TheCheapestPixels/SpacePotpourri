@@ -21,20 +21,18 @@ class MainGameStage(WECSStage):
         (0, -60, wecs.panda3d.interaction.Interacting),
         # Set inputs to the character controller
         (0, -90, wecs.panda3d.character.UpdateCharacter),
-        #(0, -91, wecs.panda3d.character.ReorientInputBasedOnCamera),
         # Character controller
         (0, -110, wecs.panda3d.character.Walking),
         (0, -120, wecs.panda3d.character.Inertiing),
         (0, -150, wecs.panda3d.character.Bumping),
         (0, -160, wecs.panda3d.character.Falling),
         (0, -170, wecs.panda3d.character.Jumping),
-        #(0, -171, wecs.panda3d.character.DirectlyIndicateDirection),
         (0, -172, wecs.panda3d.character.TurningBackToCamera),
         (0, -173, wecs.panda3d.character.AutomaticallyTurnTowardsDirection),
         (0, -200, wecs.panda3d.character.ExecuteMovement),
         # Determine and apply character's local gravity
-        #(0, -201, wecs.panda3d.gravity.AdjustGravity),
-        #(0, -202, wecs.panda3d.gravity.ErectCharacter),
+        (0, -201, wecs.panda3d.gravity.AdjustGravity),
+        (0, -202, wecs.panda3d.gravity.ErectCharacter),
         # Camera
         (0, -210, wecs.panda3d.camera.ReorientObjectCentricCamera),
         # Debug keys (`escape` to close, etc.)
@@ -52,13 +50,10 @@ class MainGameStage(WECSStage):
             base.ecs_world.create_entity(name="Level geometry"),
             overrides={
                 wecs.panda3d.prototype.Geometry: dict(
-                    #node=boterham_load_model('assets/bam/comp.bam'),
-                    #node=boterham_load_model('models/gravitytest/cylinder.bam'),
                     node=boterham_load_model('models/gravitytest/interact_plane.bam'),
                 ),
                 wecs.panda3d.gravity.GravityMap: dict(
                     node_names=['gravity'],
-                    #node_names=['gravity_cylinder'],
                 ),
             },
         )
@@ -67,13 +62,10 @@ class MainGameStage(WECSStage):
             base.ecs_world.create_entity(name="Playerbecca"),
             overrides={
                 wecs.panda3d.spawnpoints.SpawnAt: dict(
-                    #name='spawn',
-                    #name='spawn_0',
                     name='spawn_a',
                 ),
                 wecs.panda3d.gravity.GravityMovement: dict(
                     node_names=['gravity'],
-                    #node_names=['gravity_cylinder'],
                 ),
             },
         )
