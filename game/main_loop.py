@@ -19,6 +19,7 @@ class MainGameStage(WECSStage):
         (0, -40, wecs.mechanics.clock.DetermineTimestep),
         # Interaction
         (0, -60, wecs.panda3d.interaction.Interacting),
+        #(0, -61, wecs.panda3d.interaction.PrintActionOptions),
         # Set inputs to the character controller
         (0, -90, wecs.panda3d.character.UpdateCharacter),
         #(0, -91, wecs.panda3d.character.ReorientInputBasedOnCamera),
@@ -33,8 +34,8 @@ class MainGameStage(WECSStage):
         (0, -173, wecs.panda3d.character.AutomaticallyTurnTowardsDirection),
         (0, -200, wecs.panda3d.character.ExecuteMovement),
         # Determine and apply character's local gravity
-        #(0, -201, wecs.panda3d.gravity.AdjustGravity),
-        #(0, -202, wecs.panda3d.gravity.ErectCharacter),
+        (0, -201, wecs.panda3d.gravity.AdjustGravity),
+        (0, -202, wecs.panda3d.gravity.ErectCharacter),
         # Camera
         (0, -210, wecs.panda3d.camera.ReorientObjectCentricCamera),
         # Debug keys (`escape` to close, etc.)
@@ -54,11 +55,16 @@ class MainGameStage(WECSStage):
                 wecs.panda3d.prototype.Geometry: dict(
                     #node=boterham_load_model('assets/bam/comp.bam'),
                     #node=boterham_load_model('models/gravitytest/cylinder.bam'),
-                    node=boterham_load_model('models/gravitytest/interact_plane.bam'),
+                    #node=boterham_load_model('models/gravitytest/sphere_inner.bam'),
+                    node=boterham_load_model('models/gravitytest/sphere_outer.bam'),
+                    #node=boterham_load_model('models/gravitytest/interact_plane.bam'),
                 ),
                 wecs.panda3d.gravity.GravityMap: dict(
                     node_names=['gravity'],
                     #node_names=['gravity_cylinder'],
+                    geometry=wecs.panda3d.gravity.GravityType.SPHERE,
+                    direction=wecs.panda3d.gravity.GravityDirection.OUTWARD,
+                    strength=30.0,
                 ),
             },
         )
@@ -69,7 +75,8 @@ class MainGameStage(WECSStage):
                 wecs.panda3d.spawnpoints.SpawnAt: dict(
                     #name='spawn',
                     #name='spawn_0',
-                    name='spawn_a',
+                    #name='spawn_a',
+                    name='spawn_outer',
                 ),
                 wecs.panda3d.gravity.GravityMovement: dict(
                     node_names=['gravity'],
@@ -77,17 +84,17 @@ class MainGameStage(WECSStage):
                 ),
             },
         )
-        aspects.character.add(
-            base.ecs_world.create_entity(name="NPBecca"),
-            overrides={
-                wecs.panda3d.spawnpoints.SpawnAt: dict(
-                    name='spawn_b',
-                ),
-                wecs.panda3d.gravity.GravityMovement: dict(
-                    node_names=['gravity'],
-                ),
-            },
-        )
+        #aspects.character.add(
+        #    base.ecs_world.create_entity(name="NPBecca"),
+        #    overrides={
+        #        wecs.panda3d.spawnpoints.SpawnAt: dict(
+        #            name='spawn_b',
+        #        ),
+        #        wecs.panda3d.gravity.GravityMovement: dict(
+        #            node_names=['gravity'],
+        #        ),
+        #    },
+        #)
 
     def teardown(self, data):
         """
