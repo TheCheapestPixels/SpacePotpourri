@@ -297,6 +297,16 @@ As for the rest of the changes: We need a map with multiple spawn
 points, and we need an NPC; That's it.
 
 
+### `09`: Zoom.
+
+* ´main_loop´: `wecs.panda3d.camera.ZoomObjectCentricCamera`
+* `aspects`: None (applies automatically to ´ObjectCentricCameraMode´)
+* keybindings: `context camera_zoom`, ´axis zoom´
+
+
 ### TODO
 
-Everything else
+* Camera collides with terrain
+* Mouseover
+* Behavior trees
+* Everything else
