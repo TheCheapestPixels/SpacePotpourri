@@ -304,9 +304,15 @@ points, and we need an NPC; That's it.
 * keybindings: `context camera_zoom`, ´axis zoom´
 
 
+### `10`: Camera collides with terrain.
+
+* ´main_loop´: `wecs.panda3d.camera.CollideCamerasWithTerrain`
+* `aspects`: add `CollisionZoom` to camera, and `CAMERA_MASK` to
+  `game_map`'s `CollidableGeometry.mask`.
+
+
 ### TODO
 
-* Camera collides with terrain
 * Mouseover
 * Behavior trees
 * Everything else
