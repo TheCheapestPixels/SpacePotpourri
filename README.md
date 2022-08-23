@@ -311,8 +311,24 @@ points, and we need an NPC; That's it.
   `game_map`'s `CollidableGeometry.mask`.
 
 
+### `11`: Mouseover.
+
+
+
+
 ### TODO
 
-* Mouseover
-* Behavior trees
+* Programming / Documentation
+  * Mouseover
+  * Behavior trees
+  * Dis-/Embodiment
+  * Toggle mouseovering interface
+  * Toggle 3rd person camera modes
+  * Doors
+  * Animation
+  * Put the station level back on
+* Art
+  * annotate gravity nodes: shape, direction, strength, attenuation
+  * Door test level
+  * Technical documentation of WECS' support for art-defined things
 * Everything else
