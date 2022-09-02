@@ -299,27 +299,42 @@ points, and we need an NPC; That's it.
 
 ### `09`: Zoom.
 
-* ´main_loop´: `wecs.panda3d.camera.ZoomObjectCentricCamera`
+* `main_loop`: `wecs.panda3d.camera.ZoomObjectCentricCamera`
 * `aspects`: None (applies automatically to ´ObjectCentricCameraMode´)
 * keybindings: `context camera_zoom`, ´axis zoom´
 
 
 ### `10`: Camera collides with terrain.
 
-* ´main_loop´: `wecs.panda3d.camera.CollideCamerasWithTerrain`
+* `main_loop`: `wecs.panda3d.camera.CollideCamerasWithTerrain`
 * `aspects`: add `CollisionZoom` to camera, and `CAMERA_MASK` to
   `game_map`'s `CollidableGeometry.mask`.
 
 
 ### `11`: Mouseover.
 
+Getting data on what entity and/or what point of it the user is
+currently hovering the mouse over is rather similar to interactions,
+with the `Interactor` replaced by the camera.
 
+* `main_loop`:
+  * `wecs.panda3d.mouseover.MouseOverOnEntity`
+  * `wecs.panda3d.mouseover.PrintMouseOveredEntity`
+* `aspects`:
+  * `game_map`: `wecs.panda3d.mouseover.MouseOverableGeometry`
+  * `character`:
+    * `wecs.panda3d.mouseover.MouseOverable`
+    * `MouseOverable.solid`: Add factory function that creates the
+      moseover solid: `factory(lambda: CollisionSphere(0, 0, 1, 1))`
+  * `pc_mind`:
+    * `wecs.panda3d.mouseover.MouseOveringCamera`
+    * Add `"mouse_over"` to `Input.contexts`
 
 
 ### TODO
 
 * Programming / Documentation
-  * Mouseover
+  * Mouseover UI
   * Behavior trees
   * Dis-/Embodiment
   * Toggle mouseovering interface

@@ -24,7 +24,7 @@ class BorderlessFullscreenMouseHidden(Stage):
 
         props = WindowProperties()
         
-        props.cursor_hidden = True
+        #props.cursor_hidden = True
         props.fixed_size = True
         #props.foreground = True
         props.origin = (0, 0)
