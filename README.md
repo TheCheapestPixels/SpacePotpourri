@@ -331,6 +331,16 @@ with the `Interactor` replaced by the camera.
     * Add `"mouse_over"` to `Input.contexts`
 
 
+### `12`: Mouseover UI.
+
+* `main_loop`: Replace `wecs.panda3d.mouseover.PrintMouseOveredEntity`
+  with `wecs.panda3d.mouseover.UpdateMouseOverUI`.
+* `aspects`:
+  * `game_map`: `wecs.panda3d.mouseover.Pointable`
+  * `character`: `wecs.panda3d.mouseover.Targetable`
+  * `pc_mind`: `wecs.panda3d.mouseover.UserInterface`
+
+
 ### TODO
 
 * Programming / Documentation

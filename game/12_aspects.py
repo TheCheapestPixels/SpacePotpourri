@@ -18,7 +18,6 @@ game_map = Aspect(
         wecs.panda3d.prototype.CollidableGeometry,
         wecs.panda3d.mouseover.MouseOverableGeometry,
         wecs.panda3d.mouseover.Pointable,
-        #wecs.panda3d.prototype.FlattenStrong,
         wecs.panda3d.gravity.GravityMap,
         wecs.panda3d.spawnpoints.SpawnMap,
      ],
@@ -34,10 +33,6 @@ def rebecca_bumper():
     return {
         'bumper': dict(
             node_name='bumper',
-            #shape=CollisionSphere,
-            #center=Vec3(0.0, 0.0, 1.0),
-            #radius=0.7,
-            #debug=True,
         ),
     }
 
@@ -46,10 +41,6 @@ def rebecca_lifter():
     return {
         'lifter': dict(
             node_name='lifter',
-            #shape=CollisionSphere,
-            #center=Vec3(0.0, 0.0, 0.5),
-            #radius=0.5,
-            #debug=True,
         ),
     }
 
