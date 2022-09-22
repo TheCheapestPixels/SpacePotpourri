@@ -18,11 +18,12 @@ class MainGameStage(WECSStage):
         # Update clocks
         (0, -40, wecs.mechanics.clock.DetermineTimestep),
         # Interaction
-        (0, -50, wecs.panda3d.mouseover.MouseOverOnEntity),
+        (0, -50, wecs.panda3d.mouseover.NewMouseOverOnEntity),
         (0, -55, wecs.panda3d.mouseover.UpdateMouseOverUI),
-        (0, -56, wecs.panda3d.mouseover.PrintMouseOveredEntity),
+        #(0, -56, wecs.panda3d.mouseover.PrintMouseOveredEntity),
         (0, -60, wecs.panda3d.interaction.Interacting),
         # Set inputs to the character controller
+        (0, -80, wecs.panda3d.ai.Think),
         (0, -90, wecs.panda3d.character.UpdateCharacter),
         #(0, -91, wecs.panda3d.character.ReorientInputBasedOnCamera),
         # Character controller
@@ -82,7 +83,7 @@ class MainGameStage(WECSStage):
                 ),
             },
         )
-        aspects.character.add(
+        aspects.non_player_character.add(
             base.ecs_world.create_entity(name="NPBecca"),
             overrides={
                 wecs.panda3d.spawnpoints.SpawnAt: dict(

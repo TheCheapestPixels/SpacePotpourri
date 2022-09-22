@@ -1,3 +1,6 @@
+from pychology.behavior_trees import Action
+from pychology.behavior_trees import Chain
+
 from panda3d.core import Vec3
 from panda3d.core import CollisionSphere
 
@@ -9,6 +12,9 @@ from wecs.aspects import factory
 from wecs.panda3d.constants import FALLING_MASK
 from wecs.panda3d.constants import BUMPING_MASK
 from wecs.panda3d.constants import CAMERA_MASK
+
+from wecs.panda3d.behavior_trees import DoneTimer
+from wecs.panda3d.behavior_trees import IdleWhenDoneTree
 
 
 game_map = Aspect(
@@ -85,7 +91,8 @@ character = Aspect(
             clock=lambda: factory(wecs.mechanics.clock.panda3d_clock),
         ),
         wecs.panda3d.prototype.Geometry: dict(
-            file='models/character/rebecca.bam',
+            # file='models/character/rebecca.bam',
+            file='models/character/casey.bam',
         ),
         wecs.panda3d.character.CharacterController: dict(
             gravity=Vec3(0, 0, -50),
@@ -156,10 +163,51 @@ pc_mind = Aspect(
 )
 
 
+def behavior_idle():
+    return IdleWhenDoneTree(
+        Chain(
+            DoneTimer(
+                wecs.panda3d.behavior_trees.timeout(3.0),
+                Action(wecs.panda3d.behavior_trees.turn(1.0)),
+            ),
+            DoneTimer(
+                wecs.panda3d.behavior_trees.timeout(3.0),
+                Action(wecs.panda3d.behavior_trees.turn(-1.0)),
+            ),
+        ),
+    )
+
+
+def npc_behaviors():
+    return dict(
+        idle=behavior_idle(),
+    )
+
+
+npc_mind = Aspect(
+    [
+        wecs.panda3d.ai.BehaviorAI,
+    ],
+    overrides={
+        wecs.panda3d.ai.BehaviorAI: dict(
+            behaviors=lambda: npc_behaviors(),
+        ),
+    },
+)
+
+
 player_character = Aspect(
     [
         character,
         third_person,
         pc_mind,
+    ],
+)
+
+
+non_player_character = Aspect(
+    [
+        character,
+        npc_mind,
     ],
 )
